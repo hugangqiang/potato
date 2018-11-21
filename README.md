@@ -7,11 +7,11 @@
 
 egg在阿里刚开始发布的时候，我看文档就感觉就是一个比 express 更大的包，封装了更多的 service ，在用koa后就放弃了express ，自我感觉koa更符合程序的审美，目前egg 社区各类插件已经比较完善了，但egg太庞大了，因此自己写了一套。
 
-###目录解析
+##目录解析
 
 ![目录解析](https://cdn.hugangqiang.com/img/15427809332354509.png "目录解析")
 
-###页面打包
+##页面打包
 
 页面使用webpack 多页面打包，每个页面实现采用按需加载
 
@@ -115,7 +115,8 @@ const webpackBaseConfig = {
 			verbose: false,
 			dry: false,
         }),
-        //静态资源输出  这里没有url-loader 和file-loader 所以静态文件需要复制到生成后的文件夹，由于在html css 行内背景图片没有打包
+        //静态资源输出  这里没有url-loader 和file-loader 所以静态文件需要复制到生成后的文件夹，
+        //由于在html css 行内背景图片没有打包
 		//因此直接复制静态文件来解决
 		new copyPlugin([{
 			from: path.resolve(__dirname, "../src/assets"),
