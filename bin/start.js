@@ -4,7 +4,7 @@ const { App } = require('../dist/app');
 const app = new App();
 app.run(()=>{
     console.clear();
-    console.log('\x1B[42m\x1B[30m Success: \x1B[39m\x1B[49m',`http://127.0.0.1:${6000}`);
+    console.log('\x1B[42m\x1B[30m Success: \x1B[39m\x1B[49m',`http://127.0.0.1:${1616}`);
     console.log(`\n ${process.env.ENV}`)
     console.log('\n')
 });

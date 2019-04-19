@@ -24,7 +24,7 @@ export class App extends Koa {
     constructor (){
         super();
         this.loader = new Loader(this);
-        this.port = 6000;
+        this.port = 1616;
         this.ip = '0.0.0.0';
     }
     loadDefaultMiddleware() {
