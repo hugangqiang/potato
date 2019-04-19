@@ -4,12 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "webpack": "cross-env ENV=production webpack --config build/webpack.config.js",
     "start": "nodemon",
     "dev": "tsc && cross-env ENV=development node ./bin/start.js",
-    "build": "rm -rf dist && tsc && cross-env ENV=production webpack --config build/webpack.config.js && cross-env ENV=production node ./bin/start.js"
+    "build": "rm -rf dist && tsc && npm run webpack && cross-env ENV=production node ./bin/start.js"
   },
   "author": "",
   "license": "ISC",
+  "browserslist": [
+    "defaults",
+    "not ie < 9",
+    "last 5 versions",
+    "> 1%",
+    "iOS 7",
+    "last 3 iOS versions"
+  ],
   "dependencies": {
     "@types/koa": "^2.0.47",
     "@types/koa-router": "^7.0.35",
@@ -17,6 +26,7 @@
     "koa-body": "^4.0.4",
     "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
+    "koa2-cors": "^2.0.6",
     "log4js": "^3.0.6",
     "nunjucks": "^3.1.4"
   },

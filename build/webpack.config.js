@@ -20,6 +20,7 @@ let env = process.env.ENV || 'development';
 
 if(env === 'production') {
     config = {
+        //cdn: 'https://static.v-buy.com',
         cdn: '/',
         filename: {
             js: 'assets/js/[name].[hash].js',
@@ -29,7 +30,7 @@ if(env === 'production') {
     }
 }else{
     config = {
-        cdn: 'http://127.0.0.1:3000/',
+        cdn: '/',
         filename: {
             js: 'assets/js/[name].[hash].js',
             css: 'assets/css/[name].[hash:8].css',
@@ -43,7 +44,7 @@ if(env === 'production') {
 */
 const getEntry = () => {
     let entry = {}
-    glob.sync('./src/pages/**/*.js')
+    glob.sync('./client/pages/**/*.js')
         .forEach(function (name) {
             let arr = name.split('/');
             let names = [name];
@@ -91,9 +92,11 @@ const webpackBaseConfig = {
     },
     resolve: {
 		alias: {
-			'common': path.resolve(__dirname, '../src/common'),
-			'utils': path.resolve(__dirname, '../utils'),
-			'theme': path.resolve(__dirname, '../src/theme'),
+			'common': path.resolve(__dirname, '../client/common'),
+			'components': path.resolve(__dirname, '../client/components'),
+			'layout': path.resolve(__dirname, '../client/layout'),
+			'utils': path.resolve(__dirname, '../client/utils'),
+			'theme': path.resolve(__dirname, '../client/theme'),
 		}
 	},
     optimization: {
@@ -124,15 +127,15 @@ const webpackBaseConfig = {
         }),
         //静态资源输出
 		new copyPlugin([{
-			from: path.resolve(__dirname, "../src/assets"),
+			from: path.resolve(__dirname, "../client/assets"),
 			to: './assets',
 			ignore: ['.*']
 		},{
-			from: path.resolve(__dirname, "../src/components"),
+			from: path.resolve(__dirname, "../client/components"),
 			to: './components',
 			ignore: ['.*']
 		},{
-			from: path.resolve(__dirname, "../src/layout"),
+			from: path.resolve(__dirname, "../client/layout"),
 			to: './layout',
 			ignore: ['.*']
 		}]),
@@ -172,7 +175,7 @@ if(env === 'production') {
 */
 Object.keys(getEntry()).forEach(item => {
     webpackBaseConfig.plugins.push(new htmlPlugin({
-        template: `./src/pages/${item}/index.html`,
+        template: `./client/pages/${item}/index.html`,
         filename: `html/${item}.html`,
         inject: true,
         hash: true,

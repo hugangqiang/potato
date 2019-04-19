@@ -102,11 +102,8 @@ export class Loader {
     }
 
     load() {
-        this.loadConfig();
-        this.loadPlugin();
         this.loadController();
         this.loadService();
-
         this.loadRouter();
     }
 }

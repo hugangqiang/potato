@@ -1,0 +1,641 @@
+@import './default.scss';
+
+* ,
+*:after,*:before {
+    box-sizing: border-box;
+}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td,button {
+	margin: 0;
+	padding: 0;
+}
+
+ol,ul {
+	list-style: none
+}
+input {
+	vertical-align: middle;
+	line-height: inherit;
+    color: #333;
+}
+
+select {
+	appearance:none;
+	background: url("https://static.v-buy.com/assets/img/icon-select.png") no-repeat scroll right center transparent;
+	background-size: 15px 6px;
+    padding-right: 15px;
+    border-radius: 0;
+    &::-ms-expand,
+    &::-webkit-expand {
+        display: none;
+    }
+}
+
+table{
+    border-collapse: collapse;
+    border-spacing: 0;
+    background-color: transparent;
+    table-layout: fixed;
+    width: 100%;
+}
+.tb-void{
+    thead{
+        background: #fafafa;
+        height: 34px;
+        line-height: 34px;
+        th{
+            font-weight: inherit;
+        }
+    }
+}
+
+:focus {
+	outline: 0;
+}
+textarea{
+	resize: none;
+}
+body{
+    font-family: Tahoma,Verdana,Arial,"Microsoft Yahei",sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+    background: #fff;
+    color: #333;
+	position: relative;
+}
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    width: 1190px;
+    position: relative;
+}
+.container:before {
+    content: "";
+    display: table;
+}
+.container:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.row:before {
+    content: "";
+    display: table;
+}
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.fl {
+    float: left;
+}
+.fr {
+    float: right;
+}
+.btn{
+    border: none;
+	cursor: pointer;
+    display: inline-block;
+    -moz-user-select: -moz-none;
+    -moz-user-select: none;
+    -o-user-select:none;
+    -khtml-user-select:none;
+    -webkit-user-select:none;
+    -ms-user-select:none;
+    user-select:none;
+}
+img{
+	border: none;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+a:hover{
+	color: #dc2828;
+}
+::-ms-clear,
+::-ms-reveal{
+	display: none;
+}
+.mt20{
+    margin-top: 20px;
+}
+.pt20{
+    padding-top: 20px;
+}
+.text-align-left{
+    text-align: left;
+}
+.text-align-right{
+    text-align: right;
+}
+.text-align-center{
+    text-align: center;
+}
+.bg-gray{
+    background: #f5f5f5;
+}
+.gap{
+    display: inline-block;
+    width: 18px;
+}
+.c3{
+    color: #333;
+}
+.shade{
+	background: #000;
+	opacity: .6;
+	filter: Alpha(opacity=60);
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+}
+.ellipsis{
+    @extend %ellipsis;
+}
+.validate{
+	width: 100%;
+	height: 100%;
+	position: relative;
+	background: #f4f4f4;
+	text-align: center;
+	line-height: 40px;
+	color: #999;
+	font-size: 14px;
+	.box-bg{
+		width: 0px;
+		height: 40px;
+		position: absolute;
+		left: 0;
+		background: #7ac23c;
+		z-index: 1;
+	}
+	.box{
+		background: #fff;
+		text-align: center;
+		border: 1px solid #e9e8e7;
+		position: absolute;
+		width: 50px;
+		height: 40px;
+		top: 0;
+		left: 0;
+		z-index: 10;
+		cursor: move;
+		.icon-success{
+			position: relative;
+			top: 4px;
+			display: none;
+		}
+	}
+	.text{
+		position: relative;
+		z-index: 5;
+	}
+	.text.y{
+		display: none;
+		color: #fff;
+	}
+	&.success{
+		.text.n{
+			display: none;
+		}
+		.text.y{
+			display: inline-block;
+			margin-right: 50px;
+		}
+		.icon-right{
+			display: none;
+		}
+		.box{
+			cursor: default;
+			.icon-success{
+				display: inline-block;
+			}
+		}
+
+	}
+}
+.checkbox-content{
+	display: inline-block;
+	position: relative;
+	width: 16px;
+	height: 16px;
+	top: 3px;
+	.checkbox{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		opacity: 0;
+		z-index: 10;
+		top: 0;
+	}
+	.checkbox + label {
+		position: absolute;
+		z-index: 1;
+		width: 100%;
+		height: 100%;
+		border: 1px solid #999;
+		border-radius: 2px;
+		background: none;
+	}
+	.checkbox:checked + label{
+		background: url('https://static.v-buy.com/assets/img/icon-checkbox.png');
+		background-size: cover;
+		border: 1px solid transparent;
+	}
+}
+
+
+.icon-bind-y{
+	background: url('https://static.v-buy.com/assets/img/icon-bind-y.png');
+	width: 35px;
+	height: 40px;
+}
+.icon-bind-n{
+	background: url('https://static.v-buy.com/assets/img/icon-bind-n.png');
+	width: 35px;
+	height: 40px;
+}
+.icon-close{
+	background: url('https://static.v-buy.com/assets/img/icon-close.png');
+	width: 16px;
+	height: 16px;
+}
+.icon-success{
+	background: url('https://static.v-buy.com/assets/img/icon-success.png');
+	width: 20px;
+	height: 20px;
+}
+.icon-service{
+	background: url('https://static.v-buy.com/assets/img/icon-service-phone.png');
+	width: 16px;
+	height: 14px;
+}
+.icon-search-null{
+    background: url('https://static.v-buy.com/assets/img/icon-search-null.png');
+    width: 170px;
+    height: 104px;
+}
+.icon-cart-null{
+    background: url('https://static.v-buy.com/assets/img/icon-cart-null.png');
+    width: 100px;
+    height: 100px;
+}
+.icon-code-r{
+	background: url('https://static.v-buy.com/assets/img/icon-code-r.png');
+	width: 50px;
+	height: 50px;
+}
+.icon-pc-r{
+	background: url('https://static.v-buy.com/assets/img/icon-pc-r.png');
+	width: 50px;
+	height: 50px;
+}
+.icon-phone-r{
+	background: url('https://static.v-buy.com/assets/img/icon-phone.png');
+	width: 10px;
+	height: 16px;
+}
+.icon-search-w{
+	background: url('https://static.v-buy.com/assets/img/icon-search-w.png');
+	width: 20px;
+	height: 20px;
+}
+.icon-search-g{
+	background: url('https://static.v-buy.com/assets/img/icon-search-g.png');
+	width: 14px;
+	height: 14px;
+}
+.icon-cart-r{
+	background: url('https://static.v-buy.com/assets/img/icon-cart-r.png');
+	width: 22px;
+	height: 20px;
+}
+.icon-cart-w{
+	background: url('https://static.v-buy.com/assets/img/icon-cart-w.png');
+	width: 22px;
+	height: 20px;
+}
+.icon-qq{
+	background: url('https://static.v-buy.com/assets/img/icon-qq.png');
+	width: 16px;
+	height: 17px;
+}
+.icon-pass-hide{
+	background: url('https://static.v-buy.com/assets/img/icon-pass-hide.png');
+	width: 22px;
+	height: 10px;
+}
+.icon-pass-show{
+	background: url('https://static.v-buy.com/assets/img/icon-pass-show.png');
+	width: 22px;
+	height: 12px;
+}
+.icon-sign-qq{
+	background: url('https://static.v-buy.com/assets/img/icon-sign-qq.png');
+	width: 40px;
+	height: 40px;
+}
+.icon-sign-wx{
+	background: url('https://static.v-buy.com/assets/img/icon-sign-wx.png');
+	width: 40px;
+	height: 40px;
+}
+.icon-sign-phone{
+	background: url('https://static.v-buy.com/assets/img/icon-sign-phone.png');
+	width: 40px;
+	height: 40px;
+}
+.icon-sign-email{
+	background: url('https://static.v-buy.com/assets/img/icon-sign-email.png');
+	width: 40px;
+	height: 40px;
+}
+.icon-login-error{
+	background: url('https://static.v-buy.com/assets/img/icon-login-error.png');
+	width: 16px;
+	height: 16px;
+}
+.icon-line-qq{
+	background: url('https://static.v-buy.com/assets/img/icon-line-qq.png');
+	width: 18px;
+	height: 20px;
+}
+.icon-line-code{
+	background: url('https://static.v-buy.com/assets/img/icon-line-code.png');
+	width: 20px;
+	height: 20px;
+}
+.icon-line-top{
+	background: url('https://static.v-buy.com/assets/img/icon-line-top.png');
+	width: 20px;
+	height: 16px;
+}
+.icon-right {
+    background: url('https://static.v-buy.com/assets/img/icon-right.png');
+    width: 10px;
+    height: 12px;
+}
+.icon-unfold,
+.icon-downfold{
+    width: 10px;
+    height: 10px;
+    border-bottom: 1px solid #333;
+    border-left: 1px solid #333;
+    transform: rotate(-45deg);
+}
+.icon-downfold{
+    transform: rotate(-225deg);
+}
+.icon-user-home01{
+    background: url('https://static.v-buy.com/assets/img/icon-user-home01.png');
+    width: 28px;
+    height: 30px;
+}
+.icon-user-home02{
+    background: url('https://static.v-buy.com/assets/img/icon-user-home02.png');
+    width: 30px;
+    height: 24px;
+}
+.icon-user-home03{
+    background: url('https://static.v-buy.com/assets/img/icon-user-home03.png');
+    width: 28px;
+    height: 30px;
+}
+.icon-user-home04{
+    background: url('https://static.v-buy.com/assets/img/icon-user-home04.png');
+    width: 26px;
+    height: 30px;
+}
+.icon-user-home05{
+    background: url('https://static.v-buy.com/assets/img/icon-user-home05.png');
+    width: 100px;
+    height: 86px;
+}
+.icon-pdf{
+    background: url('https://static.v-buy.com/assets/img/icon-pdf.jpg');
+    width: 14px;
+    height: 16px;
+}
+.icon-news-y{
+	background: url('https://static.v-buy.com/assets/img/icon-news-y.png');
+	width: 32px;
+	height: 22px;
+}
+.icon-news-n{
+	background: url('https://static.v-buy.com/assets/img/icon-news-n.png');
+	width: 32px;
+	height: 30px;
+}
+.icon-sort-up-y{
+	background: url('https://static.v-buy.com/assets/img/icon-sort-up.png');
+	width: 8px;
+	height: 12px;
+}
+.icon-sort-up{
+	background: url('https://static.v-buy.com/assets/img/icon-sort-up-y.png');
+	width: 8px;
+	height: 12px;
+}
+.icon-sort-down{
+	background: url('https://static.v-buy.com/assets/img/icon-sort-down.png');
+	width: 8px;
+	height: 12px;
+}
+.icon-sort-down-y{
+	background: url('https://static.v-buy.com/assets/img/icon-sort-down-y.png');
+	width: 8px;
+	height: 12px;
+}
+.icon-del{
+	background: url('https://static.v-buy.com/assets/img/icon-del.png');
+	width: 12px;
+	height: 12px;
+}
+.icon-btn-active{
+	background: url('https://static.v-buy.com/assets/img/icon-btn-active.png');
+	width: 20px;
+	height: 20px;
+}
+.icon-cart-price-view{
+	background: url('https://static.v-buy.com/assets/img/icon-cart-price-view.jpg');
+	width: 16px;
+	height: 10px;
+}
+.icon-submit-success{
+    background: url('https://static.v-buy.com/assets/img/icon-submit-success.png');
+    width: 120px;
+    height: 120px;
+}
+.icon-alipay{
+    background: url('https://static.v-buy.com/assets/img/icon-alipay.png');
+    width: 92px;
+    height: 28px;
+}
+.icon-unionpay{
+    background: url('https://static.v-buy.com/assets/img/icon-unionpay.png');
+    width: 112px;
+    height: 26px;
+}
+.icon-query-pay{
+    background: url('https://static.v-buy.com/assets/img/icon-query-pay.png');
+    width: 42px;
+    height: 50px;
+}
+
+.icon-minus,
+.icon-plus{
+    width: 20px;
+    height: 20px;
+    position: relative;
+    &::before{
+        content: '';
+        width: 11px;
+        height: 1px;
+        background: #666;
+        position: absolute;
+        top: 9.5px;
+        left: 4.5px;
+    }
+}
+.icon-plus{
+    &::after{
+        content: '';
+        width: 1px;
+        height: 11px;
+        background: #666;
+        position: absolute;
+        top: 4.5px;
+        left: 9.5px;
+    }
+}
+.icon{
+	display: inline-block;
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+
+.notification{
+    z-index: 999999;
+    width: 300px;
+    min-height: 65px;
+    position: fixed;
+    top: 300px;
+    right: 0;
+    padding: 20px;
+    padding-left: 60px;
+    background: #fff;
+    box-shadow: 0px 0px 5px 1px rgba(0,0,0,.3);
+    animation: myNotiInit 500ms;
+    transition: 200ms;
+    .icon{
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        text-align: center;
+        &.success{
+            color: green;
+        }
+        &.error{
+            color: red;
+        }
+    }
+    .content{
+        line-height: 24px;
+        font-size: 16px;
+        color: #333;
+    }
+}
+@keyframes myNotiInit {
+    from {right: -300px;}
+    to {right: 0;}
+}
+
+.page{
+	text-align: right;
+	.pageWrap{
+		height: 35px;
+		display: inline-block;
+		overflow: hidden;
+		position: relative;
+		top: 15px;
+	}
+	ul li,
+	button{
+		display: inline-block;
+		height: 32px;
+		line-height: 30px;
+		text-align: center;
+		padding: 0 12px;
+		background: #fff;
+		border: 1px solid #e9e8e7;
+		cursor: pointer;
+		margin: 0 4px;
+		border-radius: 3px;
+	}
+	ul{
+		display: inline-block;
+		width: 100000px;
+		text-align: left;
+		li{
+			width: 40px;
+			padding: 0;
+			&.sel-page{
+				border: 1px solid $cr;
+				color: $cr;
+			}
+		}
+	}
+}
+
+.filter-content{
+	background: #fff;
+    margin-bottom: 20px;
+    padding: 0 20px;
+    font-size: 12px;
+	.row{
+		border-bottom: 1px dashed #e9e8e7;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		&:last-of-type{
+			border: none;
+		}
+	}
+	.name{
+		display: inline-block;
+		width: 60px;
+		line-height: 26px;
+		height: 26px;
+		margin-top: 5px;
+		margin-bottom: 5px;
+		font-size: 12px;
+        color: #999;
+        .gap{
+            width: 12px;
+        }
+	}
+	.content{
+		width: 1090px;
+		position: relative;
+		display: inline-block;
+		.box{
+			display: inline-block;
+			line-height: 1;
+			margin: 5px 20px;
+			padding: 7px 12px;
+			color: #333;
+			cursor: pointer;
+			&.active,
+			&:hover{
+				background: #f7efe8;
+				color: #a56322 !important;
+			}
+		}
+	}
+}

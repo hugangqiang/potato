@@ -48,7 +48,6 @@ class Router {
                     return
                 }
             }
-            //不冲突则注册
             this.routes[url].push(routes);
         } else {
             this.routes[url] = [];

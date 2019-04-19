@@ -39,6 +39,16 @@ module.exports = {
                 level: 'error'
             }
         }
+    },
+    site: {
+        cn: {
+            defaultTitle: '伟德芯城 www.v-buy.com',
+            phone: '021-60317246',
+            qq: '550501319'
+        },
+        en: {
+            defaultTitle: 'Vadas www.v-buy.com',
+            phone: '+86-021-60317246',
+        }
     }
 }
-

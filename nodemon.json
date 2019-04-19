@@ -6,7 +6,8 @@
         "node_modules"
     ],
     "watch": [
-        "server"
+        "server",
+        "locales"
     ],
     "exec": "npm run dev",
     "ext": "ts"

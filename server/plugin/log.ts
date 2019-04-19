@@ -1,44 +1,4 @@
-
 const log4js = require('log4js');
-const config = require('../config/config.default');
-
-const log: any = {};
-
-log4js.configure(config.log);
-
-const errorLogger = log4js.getLogger('errorLogger');
-const resLogger = log4js.getLogger('resLogger');
-const consoleLogger = log4js.getLogger('console');
-
-
-/**
- * 封装错误日志
- *
- * @param {*} ctx
- * @param {*} error
- * @param {*} resTime
- */
-log.error = (ctx: any, error: any, resTime: any) => {
-    if (ctx && error) {
-        errorLogger.error(formatError(ctx, error, resTime));
-        consoleLogger.error(formatError(ctx, error, resTime));
-    }
-};
-
-
-/**
- * 封装响应日志
- *
- * @param {*} ctx
- * @param {*} resTime
- */
-log.info = (ctx: any, resTime: any) => {
-    if (ctx) {
-        resLogger.info(formatRes(ctx, resTime));
-    }
-};
-
-
 
 /**
  * 格式化响应日志
@@ -71,7 +31,7 @@ const formatRes = (ctx: any, resTime: any) => {
 
 
 /**
- * 格式化错误日志
+ * 格式化响应错误日志
  *
  * @param {*} ctx
  * @param {*} err
@@ -97,6 +57,26 @@ const formatError = (ctx: any, err: any, resTime: any) => {
     //错误信息结束
     logText += "*************** error log end ***************" + "\n";
 
+    return logText;
+};
+
+/**
+ * 格式化错误日志
+ *
+ * @param {*} ctx
+ * @param {*} err
+ * @param {*} resTime
+ * @returns
+ */
+const formatMesError = (str: string) => {
+    let logText: string = '';
+    let date: any = new Date();
+    //错误信息开始
+    logText += "*************** error ***************" + date + "\n";
+    //错误信息
+    logText += "err stack: " + str + "\n";
+    //错误信息结束
+    logText += "*************** error ***************" + "\n";
     return logText;
 };
 
@@ -133,5 +113,44 @@ const formatReqLog = (req: any, resTime: any) => {
     return logText;
 }
 
+export default (app: any) => {
 
-export default log;
+    const logs: any = {};
+
+    log4js.configure(app.config.log);
+
+    const errorLogger = log4js.getLogger('errorLogger');
+    const resLogger = log4js.getLogger('resLogger');
+    const consoleLogger = log4js.getLogger('console');
+
+    logs.error = (str:string) => {
+        errorLogger.error(formatMesError(str));
+        consoleLogger.error(formatMesError(str));
+    }
+    /**
+     *  封装请求错误日志
+     *
+     * @param {*} ctx
+     * @param {*} error
+     * @param {*} resTime
+     */
+    logs.pageError = (ctx: any, error: any, resTime: any) => {
+        if (ctx && error) {
+            errorLogger.error(formatError(ctx, error, resTime));
+            consoleLogger.error(formatError(ctx, error, resTime));
+        }
+    };
+
+    /**
+     * 封装请求响应日志
+     *
+     * @param {*} ctx
+     * @param {*} resTime
+     */
+    logs.pageInfo = (ctx: any, resTime: any) => {
+        if (ctx) {
+            resLogger.info(formatRes(ctx, resTime));
+        }
+    };
+    app.log = logs
+}

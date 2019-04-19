@@ -16,31 +16,34 @@ export class App extends Koa {
     static Service: typeof Service = Service;
     static Router: routes = router;
     config: any;
-    test: any;
+    log: any;
+    fetch: any;
+    util: any;
+    redis: any;
 
     constructor (){
         super();
         this.loader = new Loader(this);
-        this.port = 3000;
-        this.ip = '127.0.0.1';
+        this.port = 6000;
+        this.ip = '0.0.0.0';
     }
     loadDefaultMiddleware() {
         const koaBody = require('koa-body');
+
         const statics = require('koa-static');
+        const cors = require('koa2-cors');
+
         const render = require('./lib/render').default;
-        const log = require('./lib/log').default;
-        const ENV:string = process.env.ENV || 'development';
+
 
         const renderConfig: any = {
             path: path.join(__dirname, 'views'),
-            noCache: ENV === 'development',
-            watch: ENV === 'development',
+            noCache: this.config.ENV === 'development',
+            watch: this.config.ENV === 'development',
             outputFileSystem: null,
-            filters: {
-                delHtml: (str: string) => str.replace(/<[^<>]+>/g, ''),
-            }
+            filters: {}
         }
-        if(ENV === 'development'){
+        if(this.config.ENV === 'development'){
             const webpack = require('webpack');
             const webpackConfig = require('../build/webpack.config')
             const compiler = webpack(webpackConfig);
@@ -52,7 +55,20 @@ export class App extends Koa {
             this.use(hotMiddleware(compiler));
             renderConfig.outputFileSystem = compiler.outputFileSystem
         }
+        this.use(cors({
+            origin: (ctx: any) => {
+                return '*';
+            },
+            exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
+            maxAge: 5,
+            credentials: true,
+            allowMethods: ['GET', 'POST', 'DELETE'],
+            allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+        }));
+
+
         this.use(render(renderConfig));
+
         this.use(koaBody({
             multipart: true,
             formLimit: 10000,
@@ -63,7 +79,7 @@ export class App extends Koa {
                 onFileBegin: (name: string, file: any ) => {
                     let arr = file.name.split('.');
                     let ext = arr[arr.length - 1];
-                    let dir = path.join(__dirname,`/tmp`);
+                    let dir = path.join(__dirname,`../tmp`);
 
                     if (!fs.existsSync(dir)) {
                         fs.mkdirSync(dir);
@@ -80,22 +96,28 @@ export class App extends Koa {
         this.use(statics(
             path.join(__dirname, 'views')
         ));
+
         this.use(async (ctx, next) => {
             const start: any = new Date();
             let ms: any;
+
             try {
                 await next();
                 let date: any = new Date();
                 ms = date - start;
-                log.info(ctx, ms);
+                this.log.pageInfo(ctx, ms);
             } catch (error) {
                 let date: any = new Date();
                 ms = date - start;
-                log.error(ctx, error, ms);
-            }
+                this.log.pageError(ctx, error, ms);
+            };
         });
+
     }
     run(fn: (port: number, ip: string) => void, port?: number, ip?: string) {
+        this.loader.loadConfig();
+        this.loader.loadPlugin();
+
         this.loadDefaultMiddleware();
 
         this.loader.load();

@@ -12,7 +12,7 @@
         "experimentalDecorators": true,
     },
     "include": [
-        "server/**/*",
+        "server/**/*", "server/controller/.ts", "server/lib/.ts",
         // "test/**/*"
     ]
 }

@@ -72,6 +72,7 @@ export default (opts: any) => {
     let env = createEnv(Object.assign({}, defaultConfig, opts || {}));
     return async (ctx: any, next: any) => {
         ctx.render = (view: any, model: any) => {
+            model.title = `${model.title}-${ctx.state.site[ctx.i18n.__('env')].defaultTitle}`;
             ctx.response.body = env.render(`${view}.html`, Object.assign({}, ctx.state || {}, model || {}));
             ctx.response.type = 'text/html';
         };
